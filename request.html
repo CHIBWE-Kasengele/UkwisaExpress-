@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ukwisa Express Delivery Request</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background: #f5f5f5;
+    }
+    h2 {
+      color: darkorange;
+    }
+    form {
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      max-width: 500px;
+      margin: auto;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+    input, textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+    button {
+      margin-top: 20px;
+      background-color: darkorange;
+      color: white;
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    button:hover {
+      background-color: #0c5bd3;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Ukwisa Express Delivery Request</h2>
+  <form id="deliveryForm">
+    
+    <label for="senderName">Sender's Name</label>
+    <input type="text" id="senderName" required>
+
+    <label for="senderPhone">Sender's Phone</label>
+    <input type="tel" id="senderPhone" required>
+
+    <label for="pickupAddress">Pickup Address</label>
+    <input type="text" id="pickupAddress" required>
+
+    <label for="recipientName">Recipient's Name</label>
+    <input type="text" id="recipientName" required>
+
+    <label for="recipientPhone">Recipient's Phone</label>
+    <input type="tel" id="recipientPhone" required>
+
+    <label for="deliveryAddress">Delivery Address</label>
+    <input type="text" id="deliveryAddress" required>
+
+    <label for="packageDetails">Package Description</label>
+    <textarea id="packageDetails" rows="3" placeholder="E.g. Small parcel, fragile, 2kg" required></textarea>
+
+    <label for="deliveryTime">Preferred Delivery Time</label>
+    <input type="datetime-local" id="deliveryTime">
+
+    <button type="submit">Send via WhatsApp</button>
+  </form>
+
+  <script>
+    document.getElementById('deliveryForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const senderName = document.getElementById('senderName').value;
+      const senderPhone = document.getElementById('senderPhone').value;
+      const pickupAddress = document.getElementById('pickupAddress').value;
+      const recipientName = document.getElementById('recipientName').value;
+      const recipientPhone = document.getElementById('recipientPhone').value;
+      const deliveryAddress = document.getElementById('deliveryAddress').value;
+      const packageDetails = document.getElementById('packageDetails').value;
+      const deliveryTime = document.getElementById('deliveryTime').value;
+
+      const message = `*Ukwisa Express Delivery Request*%0A
+Sender: ${senderName} (${senderPhone})%0A
+Pickup: ${pickupAddress}%0A
+Recipient: ${recipientName} (${recipientPhone})%0A
+Drop-off: ${deliveryAddress}%0A
+Package: ${packageDetails}%0A
+Preferred Time: ${deliveryTime || 'Any time'}%0A`;
+
+      const phoneNumber = '260964045903'; // Replace with your Ukwisa Express WhatsApp number (e.g., 260977123456)
+      const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+
+      window.open(whatsappURL, '_blank');
+    });
+  </script>
+
+</body>
+</html>
